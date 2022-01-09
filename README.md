@@ -9,9 +9,7 @@ A tool to watch anime from termux
 
 ## mpv-android settings
 1. Open the app
-2. Click on
-![a7d6252760c1b73b98cc838180108c93.png](_resources/bfe97fc0043642e4a030dc61a0dc0f85.png)
-
+2. Click on the button on top right corner
 3. Click on `settings`
 4. click on `Advanced`
 5. click on `Edit mpv.conf`
