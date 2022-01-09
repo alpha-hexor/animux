@@ -25,7 +25,7 @@ Open termux and enter the following commands
 3. `git clone https://github.com/alpha-hexor/animux.git`
 4. `cd animux`
 4. `chmod +x setup.sh`
-
+5. `./setup.sh`
 After that you can use the program using `python app.py`
 
 ***

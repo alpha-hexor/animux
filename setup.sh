@@ -18,8 +18,8 @@ echo "YW0gc3RhcnQgLS11c2VyIDAgLWEgYW5kcm9pZC5pbnRlbnQuYWN0aW9uLlZJRVcgLWQgIiQxIi
 chmod +x mpv
 
 echo -e "$c_yellow [*]Setting up python"
-pkg install clang
-pkg install python3
+pkg install -y clang
+pkg install -y python3
 
 echo -e "$c_blue [*]Installing python packages"
 pip install pycryptodome
@@ -28,8 +28,8 @@ pip install yarl
 pip install requests
 pip install termcolor
 pip install beautifulsoup4
-pkg instal libxslt
-pkg install libxml2
+pkg instal -y libxslt
+pkg install -y libxml2
 CFLAGS="-O0" pip install lxml
 
 clear
