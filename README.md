@@ -23,6 +23,7 @@ Open termux and enter the following commands
 1. `pkg update`
 2. `pkg install git`
 3. `git clone https://github.com/alpha-hexor/animux.git`
+4. `cd animux`
 4. `chmod +x setup.sh`
 
 After that you can use the program using `python app.py`

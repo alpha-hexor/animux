@@ -8,6 +8,7 @@ c_cyan="\033[1;36m"
 
 echo -e "$c_green [*]Setting up mpv-android"
 cd ..
+cd ..
 cd usr
 cd bin
 touch mpv
