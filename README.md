@@ -7,7 +7,7 @@ A tool to watch anime from termux
 2. **mpv-android** :- Download from playstore
 ***
 
-## ~~mpv-android settings~~
+## ~~mpv-android settings~~ **[Not Required]**
 1. ~~Open the app~~
 2. ~~Click on the button on top right corner~~
 3. ~~Click on `settings`~~
