@@ -7,14 +7,14 @@ A tool to watch anime from termux
 2. **mpv-android** :- Download from playstore
 ***
 
-## ~~mpv-android settings~~ **[Not Required]**
-1. ~~Open the app~~
-2. ~~Click on the button on top right corner~~
-3. ~~Click on `settings`~~
-4. ~~click on `Advanced`~~
-5. ~~click on `Edit mpv.conf`~~
-6. ~~Copy `referrer="https://gogoplay.io"` and paste it in the window~~
-7. ~~Click save~~
+## mpv-android settings
+1. Open the app
+2. Click on the button on top right corner
+3. Click on `settings`
+4. click on `Advanced`
+5. click on `Edit mpv.conf`
+6. Copy `referrer="https://gogoplay.io"` and paste it in the window
+7. Click save
 
 ***
 
