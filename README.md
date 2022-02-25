@@ -27,7 +27,11 @@ Open termux and enter the following commands
 4. `chmod +x setup.sh`
 5. `./setup.sh`
 
+***
 
-After that you can use the program using `python app.py`
+## Usage
+1. ``python app.py --help`` [for help menu]
+2. ``python app.py`` [for normal usage]
+3. ``python app.py --continue_stream`` [continue watch animes]
 
 ***
