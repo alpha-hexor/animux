@@ -7,6 +7,17 @@ from codebase.log import *
 from codebase.parselog import *
 from codebase.getlink import *
 
+#logo
+logo = '''
+\033[95m  ___          _                         
+\033[95m / _ \        (_)                        
+\033[95m/ /_\ \ _ __   _  _ __ ___   _   _ __  __
+\033[95m|  _  || '_ \ | || '_ ` _ \ | | | |\ \/ /
+\033[95m| | | || | | || || | | | | || |_| | >  < 
+\033[95m\_| |_/|_| |_||_||_| |_| |_| \__,_|/_/\_\
+\033[0m                                 
+'''                         
+
 #some global things
 mpv_executable = "mpv"
 
@@ -55,6 +66,8 @@ def stream_episode(name,ep_num,last_ep):
 #main shit
 def main():
     if len(sys.argv) == 1:
+        os.system("clear")
+        print(logo)
         name = input("[*]Enter anime name: ")
         animes,anime_links = search_anime(name)
         
@@ -83,6 +96,8 @@ def main():
             '''
             --help implementation
             '''
+            os.system("clear")
+            print(logo)
             colored_print("[*]Usage: python app.py --help [for help]")
             colored_print("[*]Usage: python app.py [for normal usage]")
             colored_print("[*]Usage: python app.py --continue_stream [continue watch animes]")
@@ -96,7 +111,8 @@ def main():
             '''
             --continue_stream implementation
             '''
-
+            os.system("clear")
+            print(logo)
             #check for log file
             if not os.path.exists("watch_log.txt"):
                 colored_print("[*]No watch log found")

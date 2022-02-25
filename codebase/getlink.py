@@ -5,6 +5,7 @@ import base64
 from Cryptodome.Cipher import AES
 import yarl
 
+
 #some global things
 headers = {"User-Agent" : "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"}
 main_url = "https://www1.gogoanime.pe/"
