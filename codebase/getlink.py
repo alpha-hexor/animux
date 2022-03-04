@@ -5,42 +5,59 @@ import base64
 from Cryptodome.Cipher import AES
 import yarl
 
+#huge help from animedl
 
 #some global things
 headers = {"User-Agent" : "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36"}
 main_url = "https://www1.gogoanime.pe/"
+s=b"25716538522938396164662278833288"
+iv=b"1285672985238393"
+pad_data="\x08\x0e\x03\x08\t\x03\x04\t"
 
 def get_embade_link(name,ep_num):
     '''
-    function to get embade url
+    function to get emabde url
     '''
-    
     link = main_url + name +"-episode-"+ep_num
-    
     try:
+
         r=requests.get(link,headers=headers)
     except:
-        '''
-        if sreies starts with ep 0
-        '''
         link = main_url+name+"-episode-0"
         r=requests.get(link,headers=headers)
-        
+    
     src = r.content
     soup = BeautifulSoup(src,'lxml')
 
-    for item in soup.find_all('a', attrs={'href':'#',"rel":"100",'data-video' : True}):
+    for item in soup.find_all('a', attrs={'href':'#',"rel":"1",'data-video' : True}):
         url = str(item['data-video'])
     url = "https:" + url
     return url
 
-
+def get_crypto(url):
+    '''
+    function to get crypto data
+    '''
+    r=requests.get(url,headers=headers)
+    src = r.content
+    soup = BeautifulSoup(src,'lxml')
+    for item in soup.find_all('script',attrs={'data-name':'crypto','data-value':True}):
+        crypto = str(item['data-value'])
+    return crypto
+    
 def pad(data):
     '''
     helper function
     '''
-    length = 16 - (len(data) % 16)
-    return data + chr(length)*length
+    x = len(pad_data) - (len(data)%16)
+    return data + pad_data[x:]
+
+
+def decrypt(data):
+    '''
+    function to decrypt data
+    '''
+    return AES.new(s, AES.MODE_CBC, iv=iv).decrypt(base64.b64decode(data))
 
 def generate_links(url):
     '''
@@ -49,23 +66,33 @@ def generate_links(url):
     qualities = []
     links = []
 
-    s = b"257465385929383"b"96764662879833288"
+    crypto_data=get_crypto(url)
+    #get the decrypted crypto value
+    decrypted_crypto = decrypt(crypto_data)
+    new_id = decrypted_crypto[:decrypted_crypto.index(b"&")].decode()
+    
+    
     p_url = yarl.URL(url)
     ajax_url = "https://{}/encrypt-ajax.php".format(p_url.host)
-    encrypted_ajax = base64.b64encode(AES.new(s, AES.MODE_CBC, iv=b'4206913378008135').encrypt(pad(p_url.query.get('id').replace('%3D', '=')).encode()))
+    encrypted_ajax = base64.b64encode(
+        AES.new(s,AES.MODE_CBC,iv=iv).encrypt(
+            pad(new_id).encode()
+        )
+    )
 
     #send the request
     r =requests.get(
         ajax_url,
         params={
             'id': encrypted_ajax.decode(),
-            'time': '69420691337800813569'
+            
         },
         headers={'x-requested-with': 'XMLHttpRequest'}
     )
 
-    j = json.loads(r.text)
-
+    j = json.loads(
+        decrypt(r.json().get("data")).replace(b'o"<P{#meme":', b'e":[{"file":').decode().strip("\x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\x0e\x0f\x10")
+    )
     #maximum 4 links
     for i in range(4):
         try:
